@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <servlet>
+        <servlet-name>se</servlet-name>
+        <servlet-class>ServletPack.Servlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>se</servlet-name>
+        <url-pattern>/Bonjour</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>ac</servlet-name>
+        <servlet-class>ServletPack.Accueil</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ac</servlet-name>
+        <url-pattern></url-pattern>
+    </servlet-mapping>
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <include-prelude>/WEB-INF/taglibs.jsp</include-prelude>
+        </jsp-property-group>
+    </jsp-config>
+    
+</web-app>
