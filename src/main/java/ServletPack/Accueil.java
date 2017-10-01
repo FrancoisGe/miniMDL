@@ -1,6 +1,8 @@
 package ServletPack;
 
 import beans.ConnectionForm;
+import beans.Noms;
+import beans.Utilisateur;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,24 +18,42 @@ import java.io.IOException;
 @WebServlet(name = "Accueil")
 public class Accueil extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ConnectionForm co =new ConnectionForm();
-        co.verifierId(request);
-        request.setAttribute("co",co);
 
+        //Recupère login and pass
         String login=request.getParameter("login");
         String pass=request.getParameter("pass");
 
+        //Vérifie si ok
+        Noms tableNoms =new Noms();
+        tableNoms.recupererUtilisateurs();
+        Utilisateur user = tableNoms.checkLogPass(login,pass);
+        if (user !=null){
 
-        HttpSession session =request.getSession();
-        session.setAttribute("login",login);
-        session.setAttribute("pass",pass);
+            HttpSession session =request.getSession();
+            session.setAttribute("login",user.getLogin());
+            session.setAttribute("pass",user.getPass());
+            session.setAttribute("nom",user.getNom());
+            session.setAttribute("prenom",user.getPrenom());
+            session.setAttribute("mail",user.getMail());
+            session.setAttribute("ville",user.getVille());
+            session.setAttribute("adress",user.getAdress());
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/Acceuil.jsp").forward(request,response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/Profil.jsp").forward(request,response);
+
+        }
+        else{
+            this.getServletContext().getRequestDispatcher("/WEB-INF/Acceuil.jsp").forward(request,response);
+        }
+
+
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("nom","franck");
+
+        Noms tableNoms =new Noms();
+        request.setAttribute("utilisateur",tableNoms.recupererUtilisateurs());
+
         this.getServletContext().getRequestDispatcher("/WEB-INF/Acceuil.jsp").forward(request,response);
     }
 }

@@ -9,5 +9,5 @@
 <ul>
         <li ><a href="/">Accueil</a></li>
         <li><a href="/Bonjour">Bonjour</a></li>
-        <li><a href="/back">back </a></li>
+        <li><a href="/Profil">Profil </a></li>
 </ul>

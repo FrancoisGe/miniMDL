@@ -24,6 +24,29 @@
         <url-pattern></url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>insc</servlet-name>
+        <servlet-class>ServletPack.Inscription</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>insc</servlet-name>
+        <url-pattern>/Inscription</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>profil</servlet-name>
+        <servlet-class>ServletPack.Profil</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>profil</servlet-name>
+        <url-pattern>/Profil</url-pattern>
+    </servlet-mapping>
+
+
+
+
     <jsp-config>
         <jsp-property-group>
             <url-pattern>*.jsp</url-pattern>

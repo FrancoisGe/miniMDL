@@ -11,9 +11,8 @@
     <title>Accueil</title>
 </head>
 <body>
-<%@ include file="menu.jsp"%>
 
-<c:if test="${!empty sessionScope.login && !empty sessionScope.pass}">salut ${sessionScope.login}</c:if>
+
 
 
     <form method="post" action="">
@@ -28,6 +27,17 @@
         </p>
         <input type="submit"/>
     </form>
+
+<p><a href="/Inscription">Inscription</a></p>
+
+<ul>
+    <c:forEach var ="utilisateurs" items ="${utilisateurs}">
+        <li>
+            <c:out value="${utilisateurs.prenom}"/>
+            <c:out value="${utilisateurs.nom}"/>
+        </li>
+    </c:forEach>
+</ul>
 
 
 </body>
