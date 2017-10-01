@@ -1,8 +1,10 @@
 package ServletPack;
 
-import beans.ConnectionForm;
+
 import beans.Noms;
 import beans.Utilisateur;
+import dao.DAOFactory;
+import dao.UtilisateurDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +19,16 @@ import java.io.IOException;
  */
 @WebServlet(name = "Accueil")
 public class Accueil extends HttpServlet {
+
+    private static final long serialVersionUID=1L;
+    private UtilisateurDao utilisateurDao;
+
+    public void init()throws ServletException{
+        DAOFactory daoFactory=DAOFactory.getInstance();
+        this.utilisateurDao=daoFactory.getUtilisateurDao();
+    }
+
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //Recupère login and pass
@@ -26,7 +38,7 @@ public class Accueil extends HttpServlet {
         //Vérifie si ok
         Noms tableNoms =new Noms();
         tableNoms.recupererUtilisateurs();
-        Utilisateur user = tableNoms.checkLogPass(login,pass);
+        Utilisateur user = tableNoms.checkLogPass(login,pass,this.utilisateurDao);
         if (user !=null){
 
             HttpSession session =request.getSession();
@@ -42,6 +54,8 @@ public class Accueil extends HttpServlet {
 
         }
         else{
+
+            request.setAttribute("utilisateurs",utilisateurDao.lister());
             this.getServletContext().getRequestDispatcher("/WEB-INF/Acceuil.jsp").forward(request,response);
         }
 

@@ -1,5 +1,7 @@
 package beans;
 
+import dao.UtilisateurDao;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,9 +119,9 @@ public class Noms {
 
     }
 
-    public Utilisateur checkLogPass(String login,String pass){
-        Noms tableNoms =new Noms();
-        List<Utilisateur> utilisateurList=tableNoms.recupererUtilisateurs();
+    public Utilisateur checkLogPass(String login,String pass,UtilisateurDao utilisateurDao){
+
+        List<Utilisateur> utilisateurList=utilisateurDao.lister();
         for (int i = 0; i < utilisateurList.size(); i++) {
             String log = utilisateurList.get(i).getLogin();
             if (log.equals(login)){

@@ -1,7 +1,9 @@
 package ServletPack;
 
-import beans.Noms;
+
 import beans.Utilisateur;
+import dao.DAOFactory;
+import dao.UtilisateurDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +17,15 @@ import java.io.IOException;
  */
 @WebServlet(name = "Inscription")
 public class Inscription extends HttpServlet {
+
+    private static final long serialVersionUID=1L;
+    private UtilisateurDao utilisateurDao;
+
+    public void init()throws ServletException{
+        DAOFactory daoFactory=DAOFactory.getInstance();
+        this.utilisateurDao=daoFactory.getUtilisateurDao();
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //Recup data formulaira
@@ -43,8 +54,9 @@ public class Inscription extends HttpServlet {
         request.setAttribute("utilisateur",utilisateur);
 
 
-        Noms tableNoms =new Noms();
-        tableNoms.addUtilisateur(utilisateur);
+        /*Noms tableNoms =new Noms();
+        tableNoms.addUtilisateur(utilisateur);*/
+        utilisateurDao.ajouter(utilisateur);
 
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/InscriptionOK.jsp").forward(request,response);

@@ -14,25 +14,14 @@
 </head>
 <body>
 <%@ include file="menu.jsp"%>
-${auteur.prenom}
-<c:out value="${sessionScope.login}"></c:out>
-<p>Salut les copains</p>
-<p>
-    <%
-    String var =(String) request.getAttribute("var");
-    out.println(var);
-        String name =(String) request.getAttribute("name");
-        out.println(name);
-    %>
-</p>
-<p>
-
-    <%
-        for (int i = 0; i <10 ; i++) {
-            out.println(i);
-        }
-    %>
-</p>
-bitch
+<h1>Bonjour, voici la liste des inscrits : </h1>
+<ul>
+    <c:forEach var ="utilisateurs" items ="${utilisateurs}">
+        <li>
+            <c:out value="${utilisateurs.nom}"/>
+            <c:out value="${utilisateurs.prenom}"/>
+        </li>
+    </c:forEach>
+</ul>
 </body>
 </html>
