@@ -13,6 +13,22 @@
 <body>
 <%@ include file="menu.jsp"%>
 
+<c:if test="${!empty sessionScope.login && !empty sessionScope.pass}">salut ${sessionScope.login}</c:if>
+
+
+    <form method="post" action="">
+        <p>
+            <label for="login">Id :</label>
+            <input type="text" id ="login" name ="login">
+        </p>
+
+        <p>
+            <label for="pass">Pass :</label>
+            <input type="text" id ="pass" name ="pass">
+        </p>
+        <input type="submit"/>
+    </form>
+
 
 </body>
 </html>

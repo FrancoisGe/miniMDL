@@ -15,7 +15,7 @@
 <body>
 <%@ include file="menu.jsp"%>
 ${auteur.prenom}
-<c:out value="eheh"></c:out>
+<c:out value="${sessionScope.login}"></c:out>
 <p>Salut les copains</p>
 <p>
     <%
